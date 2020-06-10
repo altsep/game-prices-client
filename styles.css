@@ -28,7 +28,7 @@
     grid-area: 2 / 1 / 2 / 1;
     text-align: center;
     border: 1px dashed #aaa;
-    /**/
+    padding: 1em;
     word-wrap: break-word;
     overflow: auto;
 }
