@@ -5,46 +5,67 @@
   body {
     font-family: Verdana, Arial, serif;
     font-size: 100%;
-    color: rgb(194, 255, 209);
-    background-color: rgb(0, 0, 0);
+    color: rgb(0, 0, 0);
+    background-color: rgb(241, 226, 198);
     margin: 0;
   }
 
 #layout {
     display: grid;
-    grid:  100px 1fr 100px / 100%;
+    grid:  50px 30em 30em 50px / 50% 50%;
     gap: 1em;
     margin: 0 20% 0 20%;
 }
 
 #top {
-    grid-area: 1 / 1 / 1 / 1;
-    background-color: rgba(6, 0, 88, 0.521);
-    padding: 1em;
+    grid-area: 1 / 1 / 1 / 3;
     text-align: center;
-    border: 1px dashed #dfdfdf;
+    border: 1px dashed #aaa;
+    margin: 0;
 }
 
-#main {
+#left1 {
     grid-area: 2 / 1 / 2 / 1;
-    background-color: rgba(6, 0, 88, 0.521);
-    padding: 1em;
     text-align: center;
-    border: 1px dashed #dfdfdf;
-    /*overflow: scroll;*/
+    border: 1px dashed #aaa;
+    /**/
     word-wrap: break-word;
+    overflow: auto;
+}
+
+#right1 {
+    grid-area: 2 / 2 / 2 / 3;
+    text-align: center;
+    border: 1px dashed #aaa;
+    word-wrap: break-word;
+    overflow: auto;
+}
+
+#left2 {
+    grid-area: 3 / 1 / 4 / 1;
+    text-align: center;
+    border: 1px dashed #aaa;
+    word-wrap: break-word;
+    overflow: auto;
+}
+
+#right2 {
+    grid-area: 3 / 2 / 4 /3;
+    text-align: center;
+    border: 1px dashed #aaa;
+    /*overflow: scroll;*/
+    white-space: pre-line;
+    overflow: auto;
 }
 
 #bottom {
-    grid-area: 3 / 1 / 3 / 1;
-    background-color: rgba(6, 0, 88, 0.521);
-    padding: 1em;
+    grid-area: 4 / 1 / 5 / 3;
     text-align: center;
-    border: 1px dashed #dfdfdf;
+    border: 1px dashed #aaa;
 }
 
 /*.ct {
-    background-color: rgb(59, 0, 0);
+    background-color: rgb(59, 0, 0, 50);
 }*/
 
 @media screen and (min-width: 400px) {
