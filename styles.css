@@ -13,7 +13,7 @@ body {
 #layout {
   display: grid;
   grid: 50px 50px 30em 30em 50px / 50% 50%;
-  gap: 1em;
+  gap: 1em 0;
   margin: 0 20% 0 20%;
 }
 
