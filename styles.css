@@ -1,38 +1,45 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-  body {
-    font-family: Verdana, Arial, serif;
-    font-size: 100%;
-    color: rgb(0, 0, 0);
-    background-color: #f1e2c6;
-    margin: 0;
-  }
+body {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 100%;
+  color: rgb(0, 0, 0);
+  background-color: #f1e2c6;
+  margin: 0;
+}
 
 #layout {
-    display: grid;
-    grid:  50px 50px 30em 30em 50px / 50% 50%;
-    gap: 1em;
-    margin: 0 20% 0 20%;
+  display: grid;
+  grid: 50px 50px 30em 30em 50px / 50% 50%;
+  gap: 1em;
+  margin: 0 20% 0 20%;
 }
 
 #top {
-    grid-area: 1 / 1 / 1 / 3;
-    text-align: center;
-    border: 1px dashed #aaaaaa;
-    margin: 0 20%;
+  grid-area: 1 / 1 / 1 / 3;
+  text-align: center;
+  border: 1px dashed #aaaaaa;
+  margin: 0 20%;
 }
 
 .input-box {
-    grid-area: 2 / 1 / 3 / 3;
-    text-align: center;
-    border: 1px dashed #aaa;
-    overflow: hidden;
-    margin: 0 20%;    
+  grid-area: 2 / 1 / 3 / 3;
+  text-align: center;
+  border: 1px dashed #aaa;
+  overflow: hidden;
+  margin: 0 20%;
 }
-.input-box input { width: 100%; height: 100%; 
-    font-size: x-large; border: 0 solid; padding: .2em; 
+.input-box input {
+  width: 100%;
+  height: 100%;
+  font-size: x-large;
+  border: none;
+  padding: 0.2em;
+}
+.input-box input:focus {
+  outline: none;
 }
 
 /* //To not display placeholder text on focus//
@@ -40,37 +47,35 @@
 */
 
 #main {
-    grid-area: 3 / 1 / 5 / 3;
-    border: 1px dashed #aaa;
-    display: grid;
-    grid: 1fr / 2fr 1fr 1fr;
-    gap: 1em;
-    padding: 1em;
+  grid-area: 3 / 1 / 5 / 3;
+  display: grid;
+  grid: 1fr / 2fr 1fr 1fr;
+  gap: 1em;
+  padding: 1em;
+  border: 1px dashed #aaa;
+}
+
+#main > * {    
+  border: 1px dashed #aaa;
+}
+
+.text-area {
+  text-align: center;
+  word-wrap: break-word;
+  overflow: auto;
 }
 
 #left1 {
-    grid-area: 1 / 1;
-    text-align: center;
-    border: 1px dashed #aaa;
-    padding: 1em;
-    word-wrap: break-word;
-    overflow: auto;
+  grid-area: 1 / 1;
+  padding: 1em;
 }
 
 #mid1 {
-    grid-area: 1 / 2;
-    text-align: center;
-    border: 1px dashed #aaa;
-    word-wrap: break-word;
-    overflow: auto;
+  grid-area: 1 / 2;
 }
 
 #right1 {
-    grid-area: 1 / 3;
-    text-align: center;
-    border: 1px dashed #aaa;
-    word-wrap: break-word;
-    overflow: auto;
+  grid-area: 1 / 3;
 }
 
 /*
@@ -92,24 +97,13 @@
 */
 
 #bottom {
-    grid-area: 5 / 1 / 6 / 3;
-    text-align: center;
-    border: 1px dashed #aaa;
+  grid-area: 5 / 1 / 6 / 3;
+  text-align: center;
+  border: 1px dashed #aaa;
 }
 
-@media screen and (min-width: 400px) {
-
-}
-@media screen and (min-width: 480px) {
-
-}
-
-@media screen and (min-width: 940px) {
-
-}
-
-@media screen and (max-width: 600px) {
-    #layout {
-         margin: 0;
-    }
+@media screen and (max-width: 1000px) {
+  #layout {
+    margin: 0;
+  }
 }
