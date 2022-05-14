@@ -17,17 +17,28 @@ module.exports = {
     mainFields: ['svelte', 'browser', 'module', 'main'],
   },
   output: {
-    path: path.join(__dirname, '/'),
-    publicPath: '/',
+    path: path.join(__dirname, 'build'),
     filename: '[name].js',
     chunkFilename: '[name].[id].js',
+    clean: true,
+  },
+  optimization: {
+    minimizer: [
+      new ESBuildMinifyPlugin({
+        target: 'es2015',
+        css: true,
+      }),
+    ],
   },
   module: {
     rules: [
       {
         test: /\.ts$/,
-        loader: 'ts-loader',
-        exclude: /node_modules/,
+        loader: 'esbuild-loader',
+        options: {
+          loader: 'ts',
+          target: 'es2015',
+        },
       },
       {
         test: /\.svelte$/,
