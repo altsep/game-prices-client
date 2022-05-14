@@ -1,3 +1,7 @@
 import { writable } from 'svelte/store';
 
-export const query = writable('');
+interface QueriesStore {
+  [key: string]: string;
+}
+
+export const queries = writable<QueriesStore>({});
