@@ -6,7 +6,9 @@
   let ref = null;
 
   onMount(() => {
-    ref.focus();
+    if (ref.name === 'title') {
+      ref.focus();
+    }
   });
 </script>
 
