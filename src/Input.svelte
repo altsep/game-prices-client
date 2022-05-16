@@ -1,9 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { queries } from './stores';
+  import { queriesStore } from './stores';
 
   export let name = 'input';
-  let ref = null;
+  let ref: null | HTMLInputElement = null;
 
   onMount(() => {
     if (ref.name === 'title') {
@@ -12,12 +12,14 @@
   });
 </script>
 
-<div class="w-max m-auto">
+<div class="">
+  <label class="mr-2" for="{name}">{name}</label>
   <input
     class="border-2 rounded-md px-2 py-1 text-base"
     type="text"
     name="{name}"
-    bind:value="{$queries[name]}"
+    id="{name}"
+    bind:value="{$queriesStore[name]}"
     bind:this="{ref}"
   />
 </div>

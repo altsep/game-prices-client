@@ -4,4 +4,4 @@ interface QueriesStore {
   [key: string]: string;
 }
 
-export const queries = writable<QueriesStore>({});
+export const queriesStore = writable<QueriesStore>({});

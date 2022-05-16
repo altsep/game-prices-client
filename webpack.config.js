@@ -38,7 +38,7 @@ module.exports = {
         loader: 'esbuild-loader',
         options: {
           loader: 'ts',
-          target: 'es2015',
+          target: 'es2017',
         },
       },
       {

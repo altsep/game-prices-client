@@ -1,15 +1,14 @@
 <script lang="ts">
   export let greeting: string;
   import Input from './Input.svelte';
-  import { queries } from './stores';
-  $: console.log($queries);
+  import SteamApp from './SteamApp.svelte';
 </script>
 
 <main class="max-w-xs m-auto">
-  <h1 class="text-pink-400 text-center text-4xl">{greeting}</h1>
-  <Input name="title" />
-  <Input name="price" />
-  <p>{Object.values($queries).join(', ')}</p>
+  <h1 class="text-pink-400 text-center text-4xl font-serif">{greeting}</h1>
+  <Input name="name" />
+  <Input name="appid" />
+  <SteamApp />
 </main>
 
 <style>
