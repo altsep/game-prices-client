@@ -2,6 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const sveltePreprocess = require('svelte-preprocess');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { ESBuildMinifyPlugin } = require('esbuild-loader');
+const Dotenv = require('dotenv-webpack');
 const path = require('path');
 
 const mode = process.env.NODE_ENV;
@@ -78,6 +79,7 @@ module.exports = {
       favicon: 'public/favicon.png',
       inject: false,
     }),
+    new Dotenv(),
   ],
   devServer: {
     static: {

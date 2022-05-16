@@ -35,3 +35,6 @@ jspm_packages/
 # Bundled files
 build/
 dist/
+
+# Modules made for testing purposes
+src/test*

@@ -2,6 +2,9 @@
   "name": "js_power_keys",
   "version": "0.1.0",
   "description": "game price tracker",
+  "dependencies": {
+    "axios": "^0.27.2"
+  },
   "devDependencies": {
     "@tsconfig/svelte": "^3.0.0",
     "@types/node": "^17.0.33",
@@ -9,6 +12,7 @@
     "@typescript-eslint/parser": "^5.23.0",
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",
+    "dotenv-webpack": "^7.1.0",
     "esbuild-loader": "^2.18.0",
     "eslint": "^8.15.0",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -39,5 +43,6 @@
     "leshka <mx24xnpi4@mozmail.com> (https://github.com/altsep)",
     "ryumka (https://github.com/wanderlobzik)"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "packageManager": "pnpm@7.1.0"
 }
