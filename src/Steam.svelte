@@ -5,9 +5,9 @@
   const API_ROOT = process.env.API_ROOT;
 
   /*   
-  STOREFRONT APIS
+  STOREFRONT API
   https://wiki.teamfortress.com/wiki/User:RJackson/StorefrontAPI#appdetails
-  APP RELATED API LIST
+  APP-RELATED API LIST
   https://steamapi.xpaw.me/#ISteamApps
   APP LIST
   'https://api.steampowered.com/ISteamApps/GetAppList/v2/?format=json';
@@ -16,6 +16,8 @@
   APP PAGE
   'https://store.steampowered.com/app/238960/Path_of_Exile/';
   */
+
+  console.log(process.env.NODE_ENV)
 
   interface App {
     appid: number;
@@ -32,18 +34,18 @@
   let appList: App[],
     appListFiltered: App[],
     appData: AppData[] = [],
-    appsUrl = API_ROOT + 'api/steamapps',
+    appsUrl = API_ROOT + '/api/steamapps',
     /* next url accepts filters! */
     appDataUrl = (appId: number) =>
       API_ROOT +
-      `api/steamappdetails/${appId}/?format=json&filters=price_overview,basic`;
+      `/api/steamappdetails/${appId}/?filters=price_overview,basic`;
 
   onMount(() => {
     /* get app list */
     axios
       .get(appsUrl)
       .then(({ data }) => {
-        /* appList is an array of 142334 items */
+        /* appList is an array of 142334+ items */
         appList = data.apps;
       })
       .catch((err) => console.log(err));
@@ -72,7 +74,6 @@
                     return a[q].toLocaleLowerCase().startsWith(qLC);
                   }
                   case 'appid': {
-                    // 57690
                     if (a[q].toString().startsWith($queriesStore[q])) {
                       console.log($queriesStore[q], a[q]);
                     }
@@ -105,9 +106,9 @@
   }
 </script>
 
-{#if displayedArr}
+{#if displayedArr && displayedArr.length > 0}
   <div>
-    <h4 class="font-bold">steam</h4>
+    <h4 class="font-bold mb-2">steam</h4>
     {#each displayedArr as { appid, name }, i}
       {#await getPrice(appid)}
         <p>...</p>
@@ -118,16 +119,16 @@
           {#if initial}
             <span class="line-through">{initial}</span>
           {/if}
-          <span>{price}</span>
           {#if discount}
             <span>-{discount}%</span>
           {/if}
+          <span>{price}</span>
         </p>
       {:catch err}
         <p>
           <span>{appid}</span>:&nbsp;
           <span>{name}</span>
-          <span class="italic text-xs font-mono">#unavailable</span>
+          <span class="italic text-xs font-mono">#price unavailable</span>
         </p>
       {/await}
     {/each}
