@@ -79,7 +79,7 @@ module.exports = {
       favicon: 'public/favicon.png',
       inject: false,
     }),
-    new Dotenv(),
+    new Dotenv({ systemvars: true }),
   ],
   devServer: {
     static: {
