@@ -31,5 +31,5 @@
 {#if sys}
   <System content="{min ? temp : content}" />
 {:else}
-  <span class={`${i && 'italic'}`}>{min ? temp : content}</span>
+  <span class={`${i ? 'italic' : ''}`}>{min ? temp : content}</span>
 {/if}

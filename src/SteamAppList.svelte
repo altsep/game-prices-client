@@ -78,7 +78,7 @@
       </p>
     {/each}
     {:else}
-    <System content='enter app title or id.' />
+    <System content='enter app title or id.' nonItalic />
   {/if}
   <!-- TODO: add logic for showing more elements -->
   <!-- <p class="font-mono text-xs italic text-gray-500 my-2 text-center">load more</p> -->
