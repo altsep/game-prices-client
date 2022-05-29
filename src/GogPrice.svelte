@@ -29,6 +29,7 @@
               .join('.')
           : ''}
       </span>
+      <span>{+basePrice.split(' ')[0] !== +finalPrice.split(' ')[0] ?`-${Math.ceil((100 * +finalPrice.split(' ')[0]) / +basePrice.split(' ')[0])}%` : ''}</span>
       <span>
         {finalPrice
           .split(' ')[0]

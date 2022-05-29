@@ -31,6 +31,11 @@
     cur = currency;
   }
 
+  initial = initial.toString().replace(/^\D/, '');
+  price = `${price.toString().replace(/^\D/, '')} ${cur
+    .toString()
+    .toLowerCase()}`;
+
   let count = 0;
   const { length: scrLength } = $appStore.data.screenshots;
   let fade = false;
@@ -112,7 +117,7 @@
       </div>
       <div class="info text-base">
         <p class="p-2 md:p-4  mt-4">{@html about}</p>
-        <div class="prices flex flex-row">
+        <div class="prices flex flex-row flex-wrap">
           <div class="text-lg">
             <p class="uppercase">steam:</p>
             <p class="price text-2xl mt-2">
@@ -124,7 +129,7 @@
                   <span>-{discount}%</span>
                 {/if}
                 <span>
-                  {price.toString().replace(/^\D/, '')}&nbsp;{cur.toString().toLowerCase()}
+                  {price}
                 </span>
               {:else}
                 <span>n/a</span>

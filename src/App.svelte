@@ -22,7 +22,7 @@
     <div
       class="home flex flex-col lg:flex-row items-center lg:items-start lg:justify-center"
     >
-      <div>
+    <div>
         <Input name="name" />
         <Input name="appid" />
         {#if loading}

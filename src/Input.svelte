@@ -21,11 +21,16 @@
     id="{name}"
     bind:value="{$queriesStore[name]}"
     bind:this="{ref}"
+    placeholder="start typing..."
   />
 </div>
 
 <style>
   div:not(:first-of-type) {
     @apply mt-4;
+  }
+
+  input::placeholder {
+    font-style: italic;
   }
 </style>
