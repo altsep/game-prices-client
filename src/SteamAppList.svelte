@@ -1,9 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import axios from 'axios';
   import { queriesStore, appStore } from './stores';
   import { getSteamAppData } from './getData';
-  import { API_ROOT } from './constants';
+  import System from './System.svelte';
 
   interface App {
     appid: number;
@@ -16,11 +15,8 @@
   onMount(async () => {
     $appStore.loading = true;
     try {
-      const appsUrl = `${API_ROOT}/api/steamapps`;
-      // get app list
-      const res: { data: { apps: App[] } } = await axios.get(appsUrl);
-      // appList is an array of 142334+ items
-      appList = res.data.apps;
+      const { apps } = await import('./steamapps.json');
+      appList = apps;
       $appStore.loading = false;
     } catch (err) {
       if (err) throw err;
@@ -81,6 +77,8 @@
         <span>{name}</span>
       </p>
     {/each}
+    {:else}
+    <System content='enter app title or id...' />
   {/if}
   <!-- TODO: add logic for showing more elements -->
   <!-- <p class="font-mono text-xs italic text-gray-500 my-2 text-center">load more</p> -->

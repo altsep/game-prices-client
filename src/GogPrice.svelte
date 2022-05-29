@@ -19,7 +19,7 @@
   <p class="uppercase">gog:</p>
   <p class="price text-2xl mt-2">
     {#await getGogProductPrice($appStore.data.name)}
-    <Loading min />
+    <Loading min mode='#' i />
     {:then { currency, basePrice, finalPrice }}
       <span class="line-through">
         {+basePrice.split(' ')[0] !== +finalPrice.split(' ')[0]
@@ -39,7 +39,7 @@
         >{currency.code === 'RUB' ? 'руб.' : currency.code.toLowerCase()}</span
       >
     {:catch}
-      <span class="italic">n/a</span>
+      <span>n/a</span>
     {/await}
   </p>
 </div>

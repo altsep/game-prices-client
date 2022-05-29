@@ -4,25 +4,32 @@
 
   export let min = false;
   export let sys = false;
+  export let i = false;
+  export let mode = '.';
+  export let text = 'loading';
 
-  let ellipses = '.';
+  let temp: string;
 
   let interval: NodeJS.Timeout;
 
-  onMount(() => {
+  function modifyString(param: string) {
+    temp = param;
     interval = setInterval(() => {
-      if (ellipses.length < 3) ellipses += '.';
-      else ellipses = '.';
-    }, 200);
-  });
+      if (temp.length < 3) {
+        temp += param;
+      } else temp = param;
+    }, 300);
+  }
+
+  onMount(() => modifyString(mode));
 
   onDestroy(() => clearInterval(interval));
 
-  $: text = `loading${ellipses}`;
+  $: content = text + temp;
 </script>
 
 {#if sys}
-  <System content="{min ? ellipses : text}" />
+  <System content="{min ? temp : content}" />
 {:else}
-  {min ? ellipses : text}
+  <span class={`${i ? 'italic' : ''}`}>{min ? temp : content}</span>
 {/if}

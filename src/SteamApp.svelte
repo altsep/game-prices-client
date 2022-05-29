@@ -2,24 +2,34 @@
   import { appStore } from './stores';
   import GogPrice from './GogPrice.svelte';
 
+  const priceOverview = $appStore.data.price_overview;
+
   $: ({
     name,
     short_description: about,
-    price_overview: priceOverview,
     metacritic,
     genres,
     screenshots,
     release_date: release,
   } = $appStore.data);
 
-  $: ({
-    initial_formatted: initial,
-    discount_percent: discount,
-    final_formatted: price,
-    currency,
-  } = priceOverview as {
-    [key: string]: string;
-  });
+  let initial: string | number;
+  let discount: string | number;
+  let price: string | number;
+  let cur: string | number;
+
+  if (priceOverview) {
+    const {
+      initial_formatted: initialFormatted,
+      discount_percent: discountPercent,
+      final_formatted: finalFormatted,
+      currency,
+    } = priceOverview;
+    initial = initialFormatted;
+    discount = discountPercent;
+    price = finalFormatted;
+    cur = currency;
+  }
 
   let count = 0;
   const { length: scrLength } = $appStore.data.screenshots;
@@ -86,7 +96,12 @@
           </div>
           {#if metacritic}
             <p class="mt-4">
-              <a class="underline" href="{metacritic.url}" target='_blank' rel='noreferrer'>metacritic</a>:
+              <a
+                class="underline"
+                href="{metacritic.url}"
+                target="_blank"
+                rel="noreferrer">metacritic</a
+              >:
               <span>{metacritic.score}</span>
             </p>
           {/if}
@@ -101,16 +116,19 @@
           <div class="text-lg">
             <p class="uppercase">steam:</p>
             <p class="price text-2xl mt-2">
-              {#if initial}
-                <span class="line-through">{initial}</span>
+              {#if priceOverview}
+                {#if initial}
+                  <span class="line-through">{initial}</span>
+                {/if}
+                {#if discount}
+                  <span>-{discount}%</span>
+                {/if}
+                <span>
+                  {price.toString().replace(/^\D/, '')}&nbsp;{cur.toString().toLowerCase()}
+                </span>
+              {:else}
+                <span>n/a</span>
               {/if}
-              {#if discount}
-                <span>-{discount}%</span>
-              {/if}
-              <span>
-                {price.replace(/^\D/, '')}&nbsp;{currency.toLowerCase()}
-              </span
-              >
             </p>
           </div>
           <GogPrice />

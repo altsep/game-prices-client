@@ -1,4 +1,4 @@
-import { writable, readable } from 'svelte/store';
+import { writable } from 'svelte/store';
 
 interface QueriesStore {
   [key: string]: string;
@@ -40,9 +40,5 @@ const appStore = writable<AppStore>({
   loading: false,
   error: null,
 });
-
-// const theme = readable<{ [key: string]: string }>({
-//   system: 'font-mono italic text-sm text-slate-500 p-4',
-// });
 
 export { queriesStore, appStore };
