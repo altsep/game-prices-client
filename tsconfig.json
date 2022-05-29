@@ -1,8 +1,12 @@
 {
   "extends": "@tsconfig/svelte/tsconfig.json",
-  "include": ["src/**/*"],
-  "exclude": ["node_modules/*"],
   "compilerOptions": {
-    "types": ["node", "svelte"]
-  }
+    "types": ["node", "svelte"],
+    "typeRoots": ["node_modules/@types"],
+    "downlevelIteration": true,
+    "importHelpers": true,
+    "noEmit": true,
+    "allowJs": true
+  },
+  "exclude": ["node_modules/*", "dist/*"]
 }

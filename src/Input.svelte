@@ -15,11 +15,17 @@
 <div class="">
   <label class="mr-2" for="{name}">{name}</label>
   <input
-    class="border-2 rounded-md px-2 py-1 text-base"
+    class="border-2 rounded-md px-2 py-1 base h-12 w-full md:w-max"
     type="text"
-    name="{name}"
+    {name}
     id="{name}"
     bind:value="{$queriesStore[name]}"
     bind:this="{ref}"
   />
 </div>
+
+<style>
+  div:not(:first-of-type) {
+    @apply mt-4;
+  }
+</style>

@@ -1,0 +1,45 @@
+<script>
+  //   import { onMount } from 'svelte';
+  import { getGogProductPrice } from './getData';
+  import { appStore } from './stores';
+  import Loading from './Loading.svelte';
+
+  //   let data;
+  //   onMount(async () => {
+  //     data = await getGogProductPrice($appStore.data.name);
+  //   });
+
+  //   const { currency, basePrice, finalPrice } = data;
+  //   const { code } = currency;
+  //   const base = basePrice.split(' ')[0];
+  //   const final = finalPrice.split(' ')[0];
+</script>
+
+<div class="text-lg">
+  <p class="uppercase">gog:</p>
+  <p class="price text-2xl mt-2">
+    {#await getGogProductPrice($appStore.data.name)}
+    <Loading min />
+    {:then { currency, basePrice, finalPrice }}
+      <span class="line-through">
+        {+basePrice.split(' ')[0] !== +finalPrice.split(' ')[0]
+          ? basePrice
+              .split(' ')[0]
+              .split(/(?=\d{2}$)/)
+              .join('.')
+          : ''}
+      </span>
+      <span>
+        {finalPrice
+          .split(' ')[0]
+          .split(/(?=\d{2}$)/)
+          .join('.')}
+      </span>
+      <span
+        >{currency.code === 'RUB' ? 'руб.' : currency.code.toLowerCase()}</span
+      >
+    {:catch}
+      <span class="italic">n/a</span>
+    {/await}
+  </p>
+</div>

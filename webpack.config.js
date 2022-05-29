@@ -1,18 +1,18 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const sveltePreprocess = require('svelte-preprocess');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { ESBuildMinifyPlugin } = require('esbuild-loader');
 const Dotenv = require('dotenv-webpack');
 const path = require('path');
+const svelteConfig = require('./svelte.config');
 
 const mode = process.env.NODE_ENV;
-const prod = mode === 'production';
+const production = mode === 'production';
 
 module.exports = {
   entry: { bundle: './src/index.ts' },
   resolve: {
     alias: {
-      svelte: path.dirname(require.resolve('svelte/package.json')),
+      svelte: path.resolve('node_modules', 'svelte'),
     },
     extensions: ['.mjs', '.js', '.ts', '.svelte'],
     mainFields: ['svelte', 'browser', 'module', 'main'],
@@ -26,7 +26,6 @@ module.exports = {
   optimization: {
     minimizer: [
       new ESBuildMinifyPlugin({
-        target: 'es2015',
         css: true,
       }),
     ],
@@ -46,14 +45,13 @@ module.exports = {
         use: {
           loader: 'svelte-loader',
           options: {
-            emitCss: prod,
-            preprocess: sveltePreprocess({
-              postcss: true,
-            }),
+            ...svelteConfig,
+            sourceMap: !production,
+            emitCss: production,
             compilerOptions: {
-              dev: !prod,
+              dev: !production,
             },
-            hotReload: !prod,
+            hotReload: !production,
           },
         },
       },
