@@ -117,7 +117,7 @@
       </div>
       <div class="info text-base">
         <p class="p-2 md:p-4  mt-4">{@html about}</p>
-        <div class="prices flex flex-row flex-wrap">
+        <div class="prices flex flex-col">
           <div class="text-lg">
             <p class="uppercase">steam:</p>
             <p class="price text-2xl mt-2">
