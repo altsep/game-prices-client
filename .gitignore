@@ -38,3 +38,6 @@ dist/
 
 # Modules made for testing purposes
 src/test*
+
+# Outdated components
+src/old/*

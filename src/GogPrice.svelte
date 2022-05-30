@@ -19,7 +19,7 @@
   <p class="uppercase">gog:</p>
   <p class="price text-2xl mt-2">
     {#await getGogProductPrice($appStore.data.name)}
-    <Loading min mode='#' i />
+      <Loading min mode="#" i />
     {:then { currency, basePrice, finalPrice }}
       <span class="line-through">
         {+basePrice.split(' ')[0] !== +finalPrice.split(' ')[0]
@@ -27,18 +27,23 @@
               .split(' ')[0]
               .split(/(?=\d{2}$)/)
               .join('.')
+              .replace(/\.00/, '')
           : ''}
       </span>
-      <span>{+basePrice.split(' ')[0] !== +finalPrice.split(' ')[0] ?`-${Math.ceil((100 * +finalPrice.split(' ')[0]) / +basePrice.split(' ')[0])}%` : ''}</span>
+      <span>{+basePrice.split(' ')[0] !== +finalPrice.split(' ')[0]
+      // find percentage of a value
+      // (100 * a) / b
+      // relative difference
+      // 100 * Math.abs((a - b) / ((a + b) / 2))
+      ? `-${Math.ceil((100 * +finalPrice.split(' ')[0]) / +basePrice.split(' ')[0])}%` : ''}</span>
       <span>
         {finalPrice
           .split(' ')[0]
           .split(/(?=\d{2}$)/)
-          .join('.')}
+          .join('.')
+          .replace(/\.00/, '')}
       </span>
-      <span
-        >{currency.code === 'RUB' ? 'руб.' : currency.code.toLowerCase()}</span
-      >
+      <span>{currency.code.toLowerCase()}</span>
     {:catch}
       <span>n/a</span>
     {/await}

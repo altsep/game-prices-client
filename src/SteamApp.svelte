@@ -31,8 +31,8 @@
     cur = currency;
   }
 
-  initial = initial.toString().replace(/^\D/, '');
-  price = `${price.toString().replace(/^\D/, '')} ${cur
+  initial = initial.toString().replace(/^\D|\s\D+/g, '');
+  price = `${price.toString().replace(/^\D|\s\D+/g, '')} ${cur
     .toString()
     .toLowerCase()}`;
 
@@ -113,6 +113,7 @@
           <p class="mt-4">
             {release.coming_soon ? 'coming soon' : `release: ${release.date}`}
           </p>
+          <!-- Add developer info -->
         </div>
       </div>
       <div class="info text-base">

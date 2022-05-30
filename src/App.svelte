@@ -1,11 +1,11 @@
 <script lang="ts">
   export let greeting: string;
   import Input from './Input.svelte';
-  import Steam from './SteamAppList.svelte';
   import SteamApp from './SteamApp.svelte';
   import Loading from './Loading.svelte';
   import System from './System.svelte';
   import { appStore } from './stores';
+  import Steam from './SteamAppList.svelte';
 
   $: ({ loading, error } = $appStore);
 </script>
@@ -22,7 +22,7 @@
     <div
       class="home flex flex-col lg:flex-row items-center lg:items-start lg:justify-center"
     >
-    <div>
+      <div>
         <Input name="name" />
         <Input name="appid" />
         {#if loading}
