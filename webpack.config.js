@@ -1,12 +1,9 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { ESBuildMinifyPlugin } = require('esbuild-loader');
 const Dotenv = require('dotenv-webpack');
 const path = require('path');
 const svelteConfig = require('./svelte.config');
-
-const mode = process.env.NODE_ENV;
-const production = mode === 'production';
+const { production } = require('./constants')
 
 module.exports = {
   entry: { bundle: './src/index.ts' },
@@ -64,14 +61,11 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
+        use: ['css-loader', 'postcss-loader'],
       },
     ],
   },
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-    }),
     new HtmlWebpackPlugin({
       template: 'public/index.html',
       favicon: 'public/favicon.png',

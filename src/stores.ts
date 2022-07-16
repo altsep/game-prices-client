@@ -4,29 +4,21 @@ interface QueriesStore {
   [key: string]: string;
 }
 
-interface AppDataEntry {
-  [key: string]: string | number;
+interface Item {
+  [key: string]: string | number | Item[];
 }
-interface AppDataArr {
-  [key: string]: ArrayLike<{ [key: string]: string | number }>;
-}
-interface Props {
-  screenshots?: Array<{
-    id: number;
-    path_thumbnail: string;
-    path_full: string;
-  }>;
-  metacritic?: { score: number; url: string };
-}
+
 type LinkedList<T> = T & {
   [key: string]: LinkedList<T>;
 };
-export type AppData = LinkedList<AppDataEntry> & Props & AppDataArr;
+
+export type AppData = LinkedList<Item>;
+
 interface AppStore {
-  data: AppData;
+  data: { serviceName: string; res: AppData };
   active: boolean;
   loading: boolean;
-  error: null | unknown;
+  error: null | { status: number; statusText: string; data: unknown };
 }
 
 const queriesStore = writable<QueriesStore>({
@@ -34,11 +26,15 @@ const queriesStore = writable<QueriesStore>({
   appid: '',
 });
 
-const appStore = writable<AppStore>({
-  data: {},
-  active: false,
-  loading: false,
-  error: null,
+const servicesStore = writable<{ [key: string]: AppStore }>({
+  gog: {
+    data: { serviceName: '', res: {} },
+    active: false,
+    loading: false,
+    error: null,
+  },
 });
 
-export { queriesStore, appStore };
+const promisesStore = writable([])
+
+export { queriesStore, servicesStore, promisesStore };

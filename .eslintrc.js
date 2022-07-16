@@ -5,53 +5,47 @@ module.exports = {
     jest: true,
     node: true,
   },
-  extends: [
-    'airbnb-base',
-    'airbnb-typescript/base',
-    'eslint:recommended',
-    'plugin:import/recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:@typescript-eslint/recommended-requiring-type-checking',
-  ],
+  root: true,
   parser: '@typescript-eslint/parser',
   parserOptions: {
     tsconfigRootDir: __dirname,
-    project: ['./tsconfig.eslint.json'],
+    project: ['./tsconfig.json'],
     extraFileExtensions: ['.svelte'],
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint', 'import', 'svelte3'],
+  rules: {
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'import/no-mutable-exports': 0,
+    'no-labels': 0,
+    'no-restricted-syntax': 0,
+    'import/no-unresolved': 'error',
+  },
+  plugins: ['@typescript-eslint', 'svelte3', 'import', 'html', 'promise'],
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    'plugin:import/recommended',
+    'plugin:import/typescript',
+    'plugin:promise/recommended',
+  ],
   overrides: [
     {
-      files: ['*.svelte'],
+      files: ['**/*.svelte'],
       processor: 'svelte3/svelte3',
-      rules: {
-        'no-undef': 'off',
-        'import/first': 'off',
-        'no-multiple-empty-lines': 'off',
-      },
     },
   ],
-  ignorePatterns: ['*config.js', '*.md'],
-  rules: {
-    'no-unused-vars': 'warn',
-    'import/no-extraneous-dependencies': [
-      'error',
-      {
-        devDependencies: true,
-      },
-    ],
-    'consistent-return': 'off',
-    'import/prefer-default-export': 'off',
-    'import/no-mutable-exports': 'off',
-    'no-return-assign': ['error', 'except-parens'],
-    '@typescript-eslint/no-unsafe-call': 'off',
-    '@typescript-eslint/no-unsafe-member-access': 'off',
-    '@typescript-eslint/restrict-template-expressions': 'off',
-    '@typescript-eslint/no-unsafe-assignment': 'off',
-  },
+  ignorePatterns: ['node_modules', '.eslintrc.js', '*.config.js'],
   settings: {
     'svelte3/typescript': true,
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
+    'import/resolver': {
+      typescript: {
+        alwaysTryTypes: true,
+      },
+    },
   },
 };

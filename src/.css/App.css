@@ -1,0 +1,15 @@
+main > * {
+  @apply mt-12;
+}
+
+.home > * {
+  @apply lg:m-8;
+}
+
+.input-container > *:first-child {
+  @apply mr-1;
+}
+
+.error {
+  @apply italic text-red-600;
+}
