@@ -6,7 +6,7 @@
 </script>
 
 <div>
-  <p class="font-serif">{name}</p>
+  <p class="font-serif">{@html name}</p>
   <p class="mt-2">
     {#await getItemData(`${service}itemprice`, id)}
       <Loading min mode="#" i />
