@@ -1,13 +1,11 @@
 <script lang="ts">
   import SliderBtn from './SliderBtn.svelte';
-  import { getItemData } from '../F/getData';
-  import Loading from './Loading.svelte';
   import System from './System.svelte';
   import Item from './Item.svelte';
-  import { servicesStore } from '../stores';
-  import ItemHeading from './ItemHeading.svelte';
 
-  export let serviceName: string, items, length;
+  export let serviceName: string,
+    items,
+    length = items.length;
 
   let count = 0;
   function handleClick(e: MouseEvent) {
@@ -34,27 +32,28 @@
 </script>
 
 <div class="relative flex flex-col">
-  <ItemHeading {serviceName} />
-  {#if items.length > 1}
-    <SliderBtn
-      handleClick="{handleClick}"
-      title="{'previous'}"
-      content="{'&lt;'}"
-    />
-  {/if}
   {#each items as item, i}
     {#if i === count}
-      <Item service="{serviceName}" {...item} />
-      {#if items.length > 1}
-        <div class="text-end">
-          <System i end p="{'pt-2'}" content="{`${i + 1} of ${length}`}" />
-        </div>
-        <SliderBtn
-          handleClick="{handleClick}"
-          title="{'next'}"
-          content="{'&gt;'}"
-        />
-      {/if}
+      <div class="md:flex justify-between">
+        <Item service="{serviceName}" {...item} />
+        {#if items.length > 1}
+          <svelte.fragment class="flex justify-center md:justify-right">
+            <SliderBtn
+              handleClick="{handleClick}"
+              title="{'previous'}"
+              content="{'&lt;'}"
+            />
+            <SliderBtn
+              handleClick="{handleClick}"
+              title="{'next'}"
+              content="{'&gt;'}"
+            />
+          </svelte.fragment>
+        {/if}
+      </div>
+      <div class="text-end">
+        <System i end p="{'pt-2'}" content="{`${i + 1} of ${length}`}" />
+      </div>
     {/if}
   {/each}
 </div>

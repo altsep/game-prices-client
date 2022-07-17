@@ -10,7 +10,7 @@
   <p class="mt-2">
     {#await getItemData(`${service}itemprice`, id)}
       <Loading min mode="#" i />
-    {:then { code, basePrice, finalPrice, message }}
+    {:then { data: { code, basePrice, finalPrice, message } }}
       {#if message}
         <span>{message}</span>
       {:else if finalPrice === '0'}

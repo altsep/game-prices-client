@@ -1,46 +1,60 @@
 <script lang="ts">
   import Input from './C/Input.svelte';
   import SubmitBtn from './C/SubmitBtn.svelte';
-  import { queriesStore, promisesStore } from './stores';
+  import { queriesStore } from './stores';
   import { getItemData } from './F/getData';
   import Items from './C/Items.svelte';
   import Loading from './C/Loading.svelte';
   import ItemHeading from './C/ItemHeading.svelte';
   import { services } from '../constants';
+  import type { AxiosResponse } from 'axios';
+
+  interface Item {
+    serviceName: string;
+    res: AxiosResponse<{ id: string; name: string; length: number }>;
+  }
+
+  let promises: Promise<Item>[];
+
+  const assignPromises = () => (promises = getAll($queriesStore.name));
 
   function getAll(name: string) {
-    const promises = services.map(async (service) => {
-      try {
-        const res = await getItemData(`${service}products`, name);
-        return { serviceName: service, res };
-      } catch (err: unknown) {
-        if (err) throw err;
-      }
-    });
-
-    $promisesStore = promises;
+    if (name) {
+      return services.map(async (service) => {
+        try {
+          const res = await getItemData(`${service}products`, name);
+          return { serviceName: service, res };
+        } catch (err: unknown) {
+          if (err) throw err;
+        }
+      });
+    }
   }
 </script>
 
-<main class="max-w-xs md:max-w-lg lg:max-w-5xl text-xl my-2 m-auto">
+<main class="max-w-xs md:max-w-lg lg:max-w-xl text-xl my-2 m-auto">
   <div
     class="home flex flex-col lg:flex-row items-center lg:items-start lg:justify-center"
   >
     <div class="input-container flex flex-row">
-      <Input name="name" handleKeyDown="{() => getAll($queriesStore.name)}" />
-      <SubmitBtn handleClick="{() => getAll($queriesStore.name)}" />
+      <Input name="name" handleKeyDown="{assignPromises}" focus />
+      <SubmitBtn handleClick="{assignPromises}" />
     </div>
   </div>
-  {#each $promisesStore as promise, i}
-    {#await promise}
-      <Loading min i />
-    {:then { serviceName, res }}
-      <Items serviceName="{serviceName}" items="{res}" length="{res.length}" />
-    {:catch { response: { data: { serviceName }, status, statusText } }}
-    <ItemHeading {serviceName} />
-      <p class="error">{status}: {statusText}</p>
-    {/await}
-  {/each}
+  {#if promises}
+    {#each promises as promise, i}
+      <ItemHeading serviceName="{services[i]}" />
+      {#await promise}
+        <Loading min i />
+      {:then { serviceName, res }}
+        <Items serviceName="{serviceName}" items="{res.data}" />
+      {:catch { response: { data: { serviceName }, status, statusText } }}
+        <p class="error">{status}: {statusText}</p>
+      {/await}
+    {/each}
+  {:else}
+    <p class="error">Please enter the name of an item to look for.</p>
+  {/if}
 </main>
 
 <style global lang="postcss">

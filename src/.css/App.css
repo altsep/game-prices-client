@@ -11,5 +11,5 @@ main > * {
 }
 
 .error {
-  @apply italic text-red-600;
+  @apply italic text-red-600 font-mono text-sm;
 }

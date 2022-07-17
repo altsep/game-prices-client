@@ -2,12 +2,12 @@
   import { onMount } from 'svelte';
   import { queriesStore } from '../stores';
 
-  export let name = 'input', handleKeyDown: () => void;
+  export let name = 'input', handleKeyDown: () => void, focus = false;
 
   let ref: null | HTMLInputElement = null;
   
   onMount(() => {
-    if (ref.name === 'title') {
+    if (focus) {
       ref.focus();
     }
   });
