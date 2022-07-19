@@ -43,7 +43,7 @@
       {/await}
     {/each}
   {:else}
-    <p class="error">Please enter the name of an item to look for.</p>
+    <p class="error text-center">Please enter the name of an item to look for.</p>
   {/if}
 </main>
 
