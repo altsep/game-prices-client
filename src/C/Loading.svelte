@@ -1,6 +1,5 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
-  import System from './System.svelte';
 
   export let min = false,
     sys = false,
@@ -29,8 +28,6 @@
   $: content = text + temp;
 </script>
 
-{#if sys}
-  <System {p} {i} content="{min ? temp : content}" />
-{:else}
-  <p class="{p} {`${i ? 'italic' : ''}`}">{min ? temp : content}</p>
-{/if}
+<p class="{p} {`${i ? 'italic' : ''}`} {sys ? 'system' : ''}">
+  {min ? temp : content}
+</p>

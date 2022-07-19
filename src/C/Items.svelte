@@ -51,9 +51,11 @@
           </svelte.fragment>
         {/if}
       </div>
-      <div class="text-end">
-        <System i end p="{'pt-2'}" content="{`${i + 1} of ${length}`}" />
-      </div>
+      {#if items.length > 1}
+        <div class="system text-right italic p-2">
+          {i + 1} of {length}
+        </div>
+      {/if}
     {/if}
   {/each}
 </div>

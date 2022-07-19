@@ -10,6 +10,10 @@ main > * {
   @apply mr-1;
 }
 
+.system {
+  @apply font-mono text-sm text-slate-400;
+}
+
 .error {
   @apply italic text-red-600 font-mono text-sm;
 }
