@@ -2,34 +2,24 @@
   import Input from './C/Input.svelte';
   import SubmitBtn from './C/SubmitBtn.svelte';
   import { queriesStore } from './stores';
-  import { getItemData } from './F/getData';
   import Items from './C/Items.svelte';
   import Loading from './C/Loading.svelte';
   import ItemHeading from './C/ItemHeading.svelte';
   import { services } from '../constants';
   import type { AxiosResponse } from 'axios';
+  import getAllProducts from './F/getAllProducts';
 
   interface Item {
     serviceName: string;
-    res: AxiosResponse<{ id: string; name: string; length: number }>;
+    res: AxiosResponse<{
+      data: { id: string; name: string; length: number }[];
+    }>;
   }
 
   let promises: Promise<Item>[];
 
-  const assignPromises = () => (promises = getAll($queriesStore.name));
-
-  function getAll(name: string) {
-    if (name) {
-      return services.map(async (service) => {
-        try {
-          const res = await getItemData(`${service}products`, name);
-          return { serviceName: service, res };
-        } catch (err: unknown) {
-          if (err) throw err;
-        }
-      });
-    }
-  }
+  const assignPromises = () =>
+    (promises = getAllProducts($queriesStore.name, services, 'products'));
 </script>
 
 <main class="max-w-xs md:max-w-lg lg:max-w-xl text-xl my-2 m-auto">

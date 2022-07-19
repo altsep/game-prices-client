@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { API_ROOT } from '../../constants';
 
-async function getItemData(serviceName: string, query: string) {
+async function getApiData(serviceName: string, query: string) {
   try {
     const url = `${API_ROOT}api/${serviceName}/${query}`;
     return await axios.get(url);
@@ -10,4 +10,4 @@ async function getItemData(serviceName: string, query: string) {
   }
 }
 
-export { getItemData };
+export { getApiData };
