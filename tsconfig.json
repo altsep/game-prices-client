@@ -8,6 +8,6 @@
     "noEmit": true,
     "allowJs": true
   },
-  "include": ["src/*", "src/old"],
+  "include": ["src/*"],
   "exclude": ["public/*", "node_modules/*", "dist/*"]
 }
