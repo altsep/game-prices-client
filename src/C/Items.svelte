@@ -1,6 +1,5 @@
 <script lang="ts">
   import SliderBtn from './SliderBtn.svelte';
-  import System from './System.svelte';
   import Item from './Item.svelte';
 
   export let serviceName: string,
