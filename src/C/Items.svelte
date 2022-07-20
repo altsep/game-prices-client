@@ -1,9 +1,10 @@
 <script lang="ts">
   import SliderBtn from './SliderBtn.svelte';
   import Item from './Item.svelte';
+  import type { Product } from '../interfaces';
 
   export let serviceName: string,
-    items,
+    items: Product[],
     length = items.length;
 
   let count = 0;

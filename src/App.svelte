@@ -5,17 +5,10 @@
   import Items from './C/Items.svelte';
   import Loading from './C/Loading.svelte';
   import { services } from '../constants';
-  import type { AxiosResponse } from 'axios';
   import getAllProducts from './F/getAllProducts';
+  import type { Service } from './interfaces';
 
-  interface Item {
-    serviceName: string;
-    res: AxiosResponse<{
-      data: { id: string; name: string; length: number }[];
-    }>;
-  }
-
-  let promises: Promise<Item>[];
+  let promises: Promise<Service>[];
 
   const assignPromises = () =>
     (promises = getAllProducts($queriesStore.name, services, 'products'));
@@ -37,8 +30,8 @@
           {services[i]}
         </h4>
         <Loading min mode="#" i />
-      {:then { serviceName, res }}
-        <Items serviceName="{serviceName}" items="{res.data}" />
+      {:then { serviceName, res: { data } }}
+        <Items serviceName="{serviceName}" items="{data}" />
       {:catch { response: { data: { serviceName }, status, statusText } }}
         <h4 class="pb-2 border-b item-heading">
           {services[i]}
