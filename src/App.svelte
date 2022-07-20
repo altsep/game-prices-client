@@ -9,9 +9,12 @@
   import type { Service } from './interfaces';
 
   let promises: Promise<Service>[];
+  let searched = false;
 
-  const assignPromises = () =>
-    (promises = getAllProducts($queriesStore.name, services, 'products'));
+  const assignPromises = () => {
+    searched = true;
+    promises = getAllProducts($queriesStore.name, services, 'products');
+  };
 </script>
 
 <main class="max-w-xs md:max-w-lg lg:max-w-xl text-xl my-2 m-auto">
@@ -34,12 +37,12 @@
         <Items serviceName="{serviceName}" items="{data}" />
       {:catch { response: { data: { serviceName }, status, statusText } }}
         <h4 class="pb-2 border-b item-heading">
-          {services[i]}
+          {serviceName}
         </h4>
         <p class="error">{status}: {statusText}</p>
       {/await}
     {/each}
-  {:else}
+  {:else if searched}
     <p class="error text-center">
       Please enter the name of an item to look for.
     </p>
