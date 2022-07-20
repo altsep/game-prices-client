@@ -4,7 +4,6 @@
   import { queriesStore } from './stores';
   import Items from './C/Items.svelte';
   import Loading from './C/Loading.svelte';
-  import ItemHeading from './C/ItemHeading.svelte';
   import { services } from '../constants';
   import type { AxiosResponse } from 'axios';
   import getAllProducts from './F/getAllProducts';
@@ -33,17 +32,24 @@
   </div>
   {#if promises}
     {#each promises as promise, i}
-      <ItemHeading serviceName="{services[i]}" />
       {#await promise}
-        <Loading min i />
+        <h4 class="pb-2 border-b item-heading">
+          {services[i]}
+        </h4>
+        <Loading min mode="#" i />
       {:then { serviceName, res }}
         <Items serviceName="{serviceName}" items="{res.data}" />
       {:catch { response: { data: { serviceName }, status, statusText } }}
+        <h4 class="pb-2 border-b item-heading">
+          {services[i]}
+        </h4>
         <p class="error">{status}: {statusText}</p>
       {/await}
     {/each}
   {:else}
-    <p class="error text-center">Please enter the name of an item to look for.</p>
+    <p class="error text-center">
+      Please enter the name of an item to look for.
+    </p>
   {/if}
 </main>
 
