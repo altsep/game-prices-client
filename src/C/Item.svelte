@@ -5,19 +5,23 @@
   export let name: string, service: string, id: string;
 </script>
 
-<div class="flex flex-col">
+<div class="min-h-[92.5px] relative">
   {#await getApiData(`${service}item`, id)}
     <Loading min mode="#" i />
-    <p class="mt-1">&nbsp;</p>
-    <p class="mt-1">&nbsp;</p>
-    <!-- <p class="mt-1">&nbsp;</p> -->
-  {:then { data: { name, currencyCode, basePrice, finalPrice, message, productUrl, status, releaseDate } }}
+  {:then { data: { name, currencyCode, basePrice, finalPrice, message, productUrl, status, releaseDate, headerImg } }}
+    <img
+      src="{headerImg}"
+      alt="header"
+      class="absolute -z-10 right-0 w-full h-full object-cover"
+    />
     <a
-      class="font-serif underline hover:no-underline"
+      class="font-serif underline hover:no-underline w-full"
       href="{productUrl}"
       target="_blank"
-      rel="noreferrer">{@html name}</a
+      rel="noreferrer"
     >
+      {@html name}
+    </a>
     <p class="mt-2">
       {#if message}
         <span>{message}</span>
@@ -51,3 +55,18 @@
     </div>
   {/await}
 </div>
+
+<style>
+  img {
+    opacity: 0.7;
+    mask-image: linear-gradient(to left, black, transparent 50%);
+  }
+
+  @media (min-width: 768px) {
+    img {
+      opacity: 0.7;
+      mask-image: linear-gradient(to left, black 20%, transparent 50%
+      );
+    }
+  }
+</style>

@@ -31,31 +31,30 @@
   }
 </script>
 
-<div class="relative flex flex-col">
-  {#each items as item, i}
-    {#if i === count}
-      <div class="md:flex justify-between">
-        <Item service="{serviceName}" {...item} />
-        {#if items.length > 1}
-          <svelte.fragment class="flex justify-center md:justify-right">
-            <SliderBtn
-              handleClick="{handleClick}"
-              title="{'previous'}"
-              content="{'&lt;'}"
-            />
-            <SliderBtn
-              handleClick="{handleClick}"
-              title="{'next'}"
-              content="{'&gt;'}"
-            />
-          </svelte.fragment>
-        {/if}
-      </div>
+{#each items as item, i}
+  {#if i === count}
+    <div class="pb-2 border-b flex justify-between items-center">
+      <h4 class="item-heading">
+        {serviceName}
+      </h4>
       {#if items.length > 1}
-        <div class="system text-right italic p-2">
+        <p class="system text-center italic">
           {i + 1} of {length}
-        </div>
+        </p>
+        <svelte.fragment class="text-center md:text-right ">
+          <SliderBtn
+            handleClick="{handleClick}"
+            title="{'previous'}"
+            content="{'&lt;'}"
+          />
+          <SliderBtn
+            handleClick="{handleClick}"
+            title="{'next'}"
+            content="{'&gt;'}"
+          />
+        </svelte.fragment>
       {/if}
-    {/if}
-  {/each}
-</div>
+    </div>
+    <Item service="{serviceName}" {...item} />
+  {/if}
+{/each}

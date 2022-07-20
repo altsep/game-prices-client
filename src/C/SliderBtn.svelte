@@ -5,7 +5,7 @@
 </script>
 
 <button
-  class="text-gray-600 text-5xl hover:bg-gray-100 opacity-50 hover:opacity-100 p-4"
+  class="text-gray-600 text-xl h-full hover:bg-gray-200 opacity-50 hover:opacity-100 px-4 md:px-8"
   on:click="{handleClick}"
   title="{title}"
 >
