@@ -61,12 +61,42 @@
 <style>
   img {
     opacity: 0.7;
+    -webkit-mask-image: -webkit-gradient(
+      linear,
+      right top,
+      left top,
+      from(black),
+      color-stop(50%, transparent)
+    );
+    -webkit-mask-image: linear-gradient(to left, black, transparent 50%);
+    mask-image: -webkit-gradient(
+      linear,
+      right top,
+      left top,
+      from(black),
+      color-stop(50%, transparent)
+    );
     mask-image: linear-gradient(to left, black, transparent 50%);
   }
 
   @media (min-width: 768px) {
     img {
       opacity: 0.7;
+      -webkit-mask-image: -webkit-gradient(
+        linear,
+        right top,
+        left top,
+        color-stop(20%, black),
+        color-stop(50%, transparent)
+      );
+      -webkit-mask-image: linear-gradient(to left, black 20%, transparent 50%);
+      mask-image: -webkit-gradient(
+        linear,
+        right top,
+        left top,
+        color-stop(20%, black),
+        color-stop(50%, transparent)
+      );
       mask-image: linear-gradient(to left, black 20%, transparent 50%);
     }
   }
