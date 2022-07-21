@@ -7,7 +7,7 @@ https://wiki.teamfortress.com/wiki/User:RJackson/StorefrontAPI#appdetails
 https://steamapi.xpaw.me/#ISteamApps
 
 ## APP LIST
-https://api.steampowered.com/ISteamApps/GetAppList/v2/?  format=json
+https://api.steampowered.com/ISteamApps/GetAppList/v2/?format=json
 
 ## APP DETAILS
 https://store.steampowered.com/api/appdetails?appids=57690&format=json&cc={countryCode}&l={language}&filters={filters}

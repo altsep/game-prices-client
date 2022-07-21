@@ -8,6 +8,7 @@
     length = items.length;
 
   let count = 0;
+
   function handleClick(e: MouseEvent) {
     const { title } = e.target as HTMLButtonElement;
     switch (title) {
@@ -33,7 +34,7 @@
 
 {#each items as item, i}
   {#if i === count}
-    <div class="pb-2 border-b flex justify-between items-center">
+    <div class="pb-2 border-b flex justify-between items-end">
       <h4 class="item-heading">
         {serviceName}
       </h4>
@@ -41,18 +42,20 @@
         <p class="system text-center italic">
           {i + 1} of {length}
         </p>
-        <svelte.fragment class="text-center md:text-right ">
-          <SliderBtn
-            handleClick="{handleClick}"
-            title="{'previous'}"
-            content="{'&lt;'}"
-          />
-          <SliderBtn
-            handleClick="{handleClick}"
-            title="{'next'}"
-            content="{'&gt;'}"
-          />
-        </svelte.fragment>
+        <div>
+          <svelte.fragment class="text-center md:text-right ">
+            <SliderBtn
+              handleClick="{handleClick}"
+              title="{'previous'}"
+              content="{'&lt;'}"
+            />
+            <SliderBtn
+              handleClick="{handleClick}"
+              title="{'next'}"
+              content="{'&gt;'}"
+            />
+          </svelte.fragment>
+        </div>
       {/if}
     </div>
     <Item service="{serviceName}" {...item} />

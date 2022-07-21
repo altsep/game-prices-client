@@ -2,18 +2,20 @@
   import Input from './C/Input.svelte';
   import SubmitBtn from './C/SubmitBtn.svelte';
   import { queriesStore } from './stores';
+  import { services } from '../constants';
   import Items from './C/Items.svelte';
   import Loading from './C/Loading.svelte';
-  import { services } from '../constants';
-  import getAllProducts from './F/getAllProducts';
   import type { Service } from './interfaces';
 
   let promises: Promise<Service>[];
+
   let searched = false;
 
-  const assignPromises = () => {
-    searched = true;
+  const handleSubmit = async () => {
+    const { default: getAllProducts } = await import('./F/getAllProducts');
     promises = getAllProducts($queriesStore.name, services, 'products');
+    $queriesStore.name = '';
+    searched = true;
   };
 </script>
 
@@ -22,8 +24,8 @@
     class="home flex flex-col lg:flex-row items-center lg:items-start lg:justify-center"
   >
     <div class="input-container flex flex-row">
-      <Input name="name" handleKeyDown="{assignPromises}" focus />
-      <SubmitBtn handleClick="{assignPromises}" />
+      <Input name="name" handleSubmit="{handleSubmit}" focus />
+      <SubmitBtn name="name" handleSubmit="{handleSubmit}" />
     </div>
   </div>
   {#if promises}
