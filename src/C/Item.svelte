@@ -33,11 +33,13 @@
       {:else if basePrice === finalPrice}
         <span>{finalPrice}</span>
         <span>{currencyCode}</span>
-      {:else if finalPrice}
+      {:else if basePrice && finalPrice}
         <span class="line-through">{basePrice}</span>
         <span>-{Math.floor(100 - (100 * +finalPrice) / +basePrice)}%</span>
         <span>{finalPrice}</span>
         <span>{currencyCode}</span>
+      {:else if finalPrice}
+        <span>{finalPrice}</span>
       {/if}
     </p>
     {#if releaseDate}
@@ -45,7 +47,7 @@
     {/if}
   {:catch { response: { data: { message }, status, statusText } }}
     {#if name}
-      <p>{@html name}</p>
+      <p class="font-serif">{@html name}</p>
     {/if}
     <div class="error mt-2">
       <p>{`${status}: ${statusText}`}</p>
@@ -65,8 +67,7 @@
   @media (min-width: 768px) {
     img {
       opacity: 0.7;
-      mask-image: linear-gradient(to left, black 20%, transparent 50%
-      );
+      mask-image: linear-gradient(to left, black 20%, transparent 50%);
     }
   }
 </style>

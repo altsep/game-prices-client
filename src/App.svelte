@@ -35,9 +35,9 @@
         <Loading min mode="#" i />
       {:then { serviceName, res: { data } }}
         <Items serviceName="{serviceName}" items="{data}" />
-      {:catch { response: { data: { serviceName }, status, statusText } }}
+      {:catch { response: { data: { }, status, statusText } }}
         <h4 class="pb-2 border-b item-heading">
-          {serviceName}
+          {services[i]}
         </h4>
         <p class="error">{status}: {statusText}</p>
       {/await}
