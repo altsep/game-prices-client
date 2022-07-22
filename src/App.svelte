@@ -41,7 +41,7 @@
         <h4 class="pb-2 border-b item-heading">
           {services[i]}
         </h4>
-        <p class="error">{status}: {statusText}</p>
+        <p class="error">{statusText}</p>
       {/await}
     {/each}
   {:else if searched}

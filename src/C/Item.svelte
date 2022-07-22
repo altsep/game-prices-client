@@ -5,10 +5,12 @@
   export let name: string, service: string, id: string;
 </script>
 
-<div class="min-h-[92.5px] relative">
-  {#await getApiData(`${service}item`, id)}
+{#await getApiData(`${service}item`, id)}
+  <div class="min-h-[92.5px] relative">
     <Loading min mode="#" i />
-  {:then { data: { name, currencyCode, basePrice, finalPrice, message, productUrl, status, releaseDate, headerImg } }}
+  </div>
+{:then { data: { name, basePrice, finalPrice, formattedBasePrice, formattedPrice, message, productUrl, status, releaseDate, headerImg } }}
+  <div class="min-h-[92.5px] relative">
     <img
       src="{headerImg}"
       alt="header"
@@ -28,35 +30,31 @@
       {/if}
       {#if status}
         <span class="uppercase">{status}</span>
-      {:else if !finalPrice}
+      {:else if basePrice && basePrice !== finalPrice}
+        <span class="line-through">{formattedBasePrice}</span>
+        <span>-{Math.floor(100 - (100 * finalPrice) / basePrice)}%</span>
+        <span>{formattedPrice}</span>
+      {:else if formattedPrice}
+        <span>{formattedPrice}</span>
+      {:else}
         <span class="italic font-mono">n/a</span>
-      {:else if basePrice === finalPrice}
-        <span>{finalPrice}</span>
-        <span>{currencyCode}</span>
-      {:else if basePrice && finalPrice}
-        <span class="line-through">{basePrice}</span>
-        <span>-{Math.floor(100 - (100 * +finalPrice) / +basePrice)}%</span>
-        <span>{finalPrice}</span>
-        <span>{currencyCode}</span>
-      {:else if finalPrice}
-        <span>{finalPrice}</span>
       {/if}
     </p>
     {#if releaseDate}
       <p class="font-mono text-sm mt-2">release: {releaseDate}</p>
     {/if}
-  {:catch { response: { data: { message }, status, statusText } }}
-    {#if name}
-      <p class="font-serif">{@html name}</p>
+  </div>
+{:catch { response: { data: { message }, status, statusText } }}
+  {#if name}
+    <h4 class="font-serif">{@html name}</h4>
+  {/if}
+  <div class="error mt-12">
+    <p>{`${statusText}`}</p>
+    {#if message}
+      <p>{message}.</p>
     {/if}
-    <div class="error mt-2">
-      <p>{`${status}: ${statusText}`}</p>
-      {#if message}
-        <p>{message}.</p>
-      {/if}
-    </div>
-  {/await}
-</div>
+  </div>
+{/await}
 
 <style>
   img {
