@@ -1,4 +1,4 @@
-main > * {
+main > *:not(:first-child) {
   @apply mt-12;
 }
 
