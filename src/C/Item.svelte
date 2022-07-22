@@ -45,10 +45,10 @@
     {/if}
   </div>
 {:catch { response: { data: { message }, status, statusText } }}
-  {#if name}
-    <h4 class="font-serif">{@html name}</h4>
-  {/if}
   <div class="error mt-12">
+    {#if name}
+      <h4 class="font-serif">{@html name}</h4>
+    {/if}
     <p>{`${statusText}`}</p>
     {#if message}
       <p>{message}.</p>
