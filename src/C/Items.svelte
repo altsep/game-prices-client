@@ -9,25 +9,19 @@
 
   let count = 0;
 
-  function handleClick(e: MouseEvent) {
-    const { title } = e.target as HTMLButtonElement;
-    switch (title) {
-      case 'next':
-        if (count < length - 1) {
-          count += 1;
-        } else {
-          count = 0;
-        }
-        break;
-      case 'previous':
-        if (count > 0) {
-          count -= 1;
-        } else {
-          count = length - 1;
-        }
-        break;
-      default:
-        return;
+  function inc() {
+    if (count < length - 1) {
+      count += 1;
+    } else {
+      count = 0;
+    }
+  }
+
+  function dec() {
+    if (count > 0) {
+      count -= 1;
+    } else {
+      count = length - 1;
     }
   }
 </script>
@@ -45,12 +39,12 @@
         <div>
           <svelte.fragment class="text-center md:text-right ">
             <SliderBtn
-              handleClick="{handleClick}"
+              handleClick="{dec}"
               title="{'previous'}"
               content="{'&lt;'}"
             />
             <SliderBtn
-              handleClick="{handleClick}"
+              handleClick="{inc}"
               title="{'next'}"
               content="{'&gt;'}"
             />
