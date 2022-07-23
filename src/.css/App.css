@@ -1,13 +1,13 @@
 main > *:not(:first-child) {
-  @apply mt-12;
+  @apply mt-4 md:mt-8 lg:mt-12;
 }
 
 main > *:last-child {
-  @apply mb-12;
+  @apply mt-4 md:mt-8 lg:mb-12;
 }
 
 .input-container {
-  @apply lg:m-8;
+  @apply m-2 md:m-4 lg:m-8;
 }
 
 .input-container > *:first-child {

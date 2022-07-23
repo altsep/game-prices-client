@@ -49,7 +49,7 @@
     {#if name}
       <h4 class="font-serif">{@html name}</h4>
     {/if}
-    <div class="error">
+    <div class="error mt-2">
       <p>{`${statusText}`}</p>
       {#if message}
         <p>{message}.</p>
