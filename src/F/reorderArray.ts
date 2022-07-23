@@ -6,7 +6,6 @@ export default function reorderArray(
 ): string[] {
   const newArr = arr.slice();
   const from = arr.indexOf(current);
-  console.log(from, to);
   newArr.splice(to, 0, newArr.splice(from, 1)[0]);
   return newArr;
 }

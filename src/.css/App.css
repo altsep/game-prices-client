@@ -6,7 +6,7 @@ main > *:last-child {
   @apply mb-12;
 }
 
-.home > * {
+.input-container {
   @apply lg:m-8;
 }
 

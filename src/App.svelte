@@ -21,7 +21,7 @@
 
 <main class="max-w-xs md:max-w-lg lg:max-w-xl text-xl my-2 m-auto">
   <div
-    class="home flex flex-col lg:flex-row items-center lg:items-start lg:justify-center"
+    class="flex flex-col lg:flex-row items-center lg:items-start lg:justify-center"
   >
     <div class="input-container flex flex-row">
       <Input name="name" handleSubmit="{handleSubmit}" focus />
