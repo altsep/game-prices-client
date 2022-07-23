@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { getApiData } from '../F/getData';
+  import { getApiData } from '../F/getApiData';
   import Loading from './Loading.svelte';
 
   export let name: string, service: string, id: string;
 </script>
 
-{#await getApiData(`${service}item`, id)}
+{#await getApiData(service, 'item', id)}
   <div class="min-h-[92.5px] relative">
     <Loading min mode="#" i />
   </div>
@@ -45,14 +45,16 @@
     {/if}
   </div>
 {:catch { response: { data: { message }, status, statusText } }}
-  <div class="error mt-12">
+  <div class="mt-12">
     {#if name}
       <h4 class="font-serif">{@html name}</h4>
     {/if}
-    <p>{`${statusText}`}</p>
-    {#if message}
-      <p>{message}.</p>
-    {/if}
+    <div class="error">
+      <p>{`${statusText}`}</p>
+      {#if message}
+        <p>{message}.</p>
+      {/if}
+    </div>
   </div>
 {/await}
 
