@@ -17,6 +17,11 @@
     $queriesStore.name = '';
     searched = true;
   };
+
+  let servicesHtml = services
+    .map((s) => `<span class='font-bold'>${s.toUpperCase()}</span>`)
+    .join(',&nbsp;')
+    .replace(/(.+),&nbsp;(.+)$/, '$1 and $2');
 </script>
 
 <main class="max-w-xs md:max-w-lg lg:max-w-xl text-xl my-2 m-auto">
@@ -28,13 +33,27 @@
       <SubmitBtn name="name" handleSubmit="{handleSubmit}" />
     </div>
   </div>
+  {#if !searched}
+    <div class="system">
+      <p>Welcome to the game stores prices aggregator.</p>
+      <p>
+        Here a name of the application to search for can be entered to get a
+        formatted list of items.
+      </p>
+      <p>
+        The app does not utilize a DB and merely returns search results for each
+        of the corresponding services, then separately requests details for
+        every displayed item — currently {@html servicesHtml} stores are supported.
+      </p>
+    </div>
+  {/if}
   {#if promises}
     {#each promises as promise, i}
       {#await promise}
         <h4 class="pb-2 border-b item-heading">
           {services[i]}
         </h4>
-        <Loading min mode="#" i />
+        <Loading i />
       {:then { serviceName, res: { data } }}
         <Items serviceName="{serviceName}" items="{data}" />
       {:catch { response: { data: { }, status, statusText } }}
