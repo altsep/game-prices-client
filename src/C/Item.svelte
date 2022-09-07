@@ -7,7 +7,7 @@
 
 {#await getApiData(service, 'item', id)}
   <div class="min-h-[92.5px] relative">
-    <Loading min mode="#" i />
+    <Loading i />
   </div>
 {:then { data: { name, basePrice, finalPrice, formattedBasePrice, formattedPrice, message, productUrl, status, releaseDate, headerImg } }}
   <div class="min-h-[92.5px] relative">

@@ -4,9 +4,10 @@
   export let min = false,
     sys = false,
     i = false,
+    lc = false,
     p = 'p-0',
     mode = '.',
-    text = 'loading';
+    text = 'Loading';
 
   let temp: string;
 
@@ -28,6 +29,6 @@
   $: content = text + temp;
 </script>
 
-<p class="{p} {`${i ? 'italic' : ''}`} {sys ? 'system' : ''}">
+<p class="{p} {`${i ? 'italic' : ''}`} {lc ? 'lowercase' : ''} {sys ? 'system' : ''} text-base">
   {min ? temp : content}
 </p>
